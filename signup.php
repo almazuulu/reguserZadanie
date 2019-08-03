@@ -1,5 +1,6 @@
 <?php
 	include("includes/header.php"); 
+	include("includes/config.php");
 	$message1="";
 	$message2="";
 	$message3="";
@@ -7,6 +8,8 @@
 	$message5="";
 	$message6="";
 	$message7="";
+	$messageSucess="";
+
 
 	if(isset($_POST['submit']))
 	{
@@ -42,19 +45,28 @@
 			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
 		}
 		
-		else if(strlen($psswrd)<8)
+		else if(strlen($psswrd)<6)
 		{
-			$message6="<div class='error'>Пароль должен состоять как минимум из 8 знаков!</div>";
+			$message6="<div class='error'>Пароль должен состоять как минимум из 6 символов!</div>";
 		}
 		else if(strlen($psswrd!==$psswrdCopy))
 		{
 			$message7="<div class='error'>Пароли не совпадают!</div>";
+		}
+		else 
+		{
+			mysqli_query($conDB,"INSERT INTO users(mail,uName,password,lastName,firstName,middleName,sexUser,countryUser) VALUES($mail,$uName,$psswrd,$lName,$fName,$mName,$sexUser,$countryUser)");
+			$messageSucess="<div class='success'>Вы успешно зарегестрированы!</div>";
 		}
 	}
 ?>
 <title>Регистрация нового пользователя</title>
 </head>
 <style type="text/css">
+	.success
+	{
+		color:green;
+	}
 	.error
 	{
 		color: red;
