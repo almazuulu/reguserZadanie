@@ -21,6 +21,7 @@
 		$countryUser=$_POST['country'];
 		//echo $email."</br>".$uName."</br>".$psswrd."</br>".$psswrdCopy."</br>".$lName."</br>".$fName."</br>".$mName."</br>".$sexUser."</br>".$countryUser;
 		
+		//процедура валидации
 		if(!filter_var($mail,FILTER_VALIDATE_EMAIL))
 		{
 			$message5="<div class='error'>Пожалуйста введите правильный адрес почты!</div>";
