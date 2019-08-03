@@ -5,6 +5,8 @@
 	$message3="";
 	$message4="";
 	$message5="";
+	$message6="";
+	$message7="";
 
 	if(isset($_POST['submit']))
 	{
@@ -19,25 +21,34 @@
 		$countryUser=$_POST['country'];
 		//echo $email."</br>".$uName."</br>".$psswrd."</br>".$psswrdCopy."</br>".$lName."</br>".$fName."</br>".$mName."</br>".$sexUser."</br>".$countryUser;
 		
-		if(strlen($uName)<3)
-		{
-			$message1="<div class='error'>Имя пользователя должна содержать как минимум 3 буквы!</div>";
-		}
-		if(strlen($fName)<3)
-		{
-			$message2="<div class='error'>Имя должна содержать как минимум 3 буквы!</div>";
-		}
-		if(strlen($lName)<3)
-		{
-			$message3="<div class='error'>Фамилия должна содержать как минимум 3 буквы!</div>";
-		}
-		if(strlen($mName)<3)
-		{
-			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
-		}
 		if(!filter_var($mail,FILTER_VALIDATE_EMAIL))
 		{
 			$message5="<div class='error'>Пожалуйста введите правильный адрес почты!</div>";
+		}
+		else if(strlen($uName)<3)
+		{
+			$message1="<div class='error'>Имя пользователя должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(strlen($fName)<3)
+		{
+			$message2="<div class='error'>Имя должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(strlen($lName)<3)
+		{
+			$message3="<div class='error'>Фамилия должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(strlen($mName)<3)
+		{
+			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
+		}
+		
+		else if(strlen($psswrd)<8)
+		{
+			$message6="<div class='error'>Пароль должен состоять как минимум из 8 знаков!</div>";
+		}
+		else if(strlen($psswrd!==$psswrdCopy))
+		{
+			$message7="<div class='error'>Пароли не совпадают!</div>";
 		}
 	}
 ?>
@@ -80,12 +91,14 @@
 				<div class="form-group">
 					<label>Пароль : </label>
 					<input type="password" name="password" placeholder="пароль" class="form-control">
+					<?php echo $message6; ?>
 				</div>
 
 				<!--повторный ввод пароля-->
 				<div class="form-group">
 					<label>Подтвердить пароль : </label>
 					<input type="password" name="passwordConfirm" placeholder="Подтвердить пароль" class="form-control">
+					<?php echo $message7; ?>
 				</div>
 
 				<!--фамилия -->
