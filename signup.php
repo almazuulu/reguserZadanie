@@ -1,13 +1,58 @@
 <?php
 	include("includes/header.php"); 
+	$message1="";
+	$message2="";
+	$message3="";
+	$message4="";
+	$message5="";
+
+	if(isset($_POST['submit']))
+	{
+		$email=$_POST['emailuser'];
+		$uName=$_POST['userName'];
+		$psswrd=$_POST['password'];
+		$psswrdCopy=$_POST['passwordConfirm'];
+		$lName=$_POST['lastName'];
+		$fName=$_POST['firstName'];
+		$mName=$_POST['middleName'];
+		$sexUser=$_POST['sex'];
+		$countryUser=$_POST['country'];
+		//echo $email."</br>".$uName."</br>".$psswrd."</br>".$psswrdCopy."</br>".$lName."</br>".$fName."</br>".$mName."</br>".$sexUser."</br>".$countryUser;
+		
+		if(strlen($uName)<3)
+		{
+			$message1="<div class='error'>Имя пользователя должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(strlen($fName)<3)
+		{
+			$message2="<div class='error'>Имя должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(strlen($lName)<3)
+		{
+			$message3="<div class='error'>Фамилия должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(strlen($mName)<3)
+		{
+			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
+		}
+		else if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+		{
+			$message5="<div class='error'>Пожалуйста введите правильный адрес почты!</div>";
+		}
+	}
 ?>
 <title>Регистрация нового пользователя</title>
 </head>
 <style type="text/css">
+	.error
+	{
+		color: red;
+	}
 	#body-bg
 	{
 		background: url("images/imagebg.jpg") center no-repeat fixed;
 	}
+
 
 </style>
 <body id="body-bg">
@@ -27,6 +72,7 @@
 				<div class="form-group">
 					<label>Имя пользователя : </label>
 					<input type="text" name="userName" placeholder="Имя пользователя" class="form-control">
+					<?php echo $message1; ?>
 				</div>
 
 				<!--пароль-->
@@ -45,26 +91,29 @@
 				<div class="form-group">
 					<label>Фамилия пользователя : </label>
 					<input type="text" name="lastName" placeholder="Фамилия" class="form-control">
+					<?php echo $message3; ?>
 				</div>
 
 				<!--имя -->
 				<div class="form-group">
 					<label>Имя : </label>
 					<input type="text" name="firstName" placeholder="Имя" class="form-control">
+					<?php echo $message2; ?>
 				</div>
 
 				<!--отчество -->
 				<div class="form-group">
 					<label>Отчество : </label>
 					<input type="text" name="middleName" placeholder="Отчество" class="form-control">
+					<?php echo $message4; ?>
 				</div>
 
 				<!--Пол пользователя -->
 				<div class="form-group">
 					<label>Выберите Пол : </label>
 					<select class="form-control" name="sex">
-					  <option value="мужской">Мужской</option>
-					  <option value="женский">Женский</option>
+					  <option value="man">Мужской</option>
+					  <option value="woman">Женский</option>
 					</select>
 				</div>
 
