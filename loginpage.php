@@ -3,10 +3,12 @@
 	include("includes/header.php"); 
 	include("includes/config.php");
 	include("includes/functions.php");
+	//инициализация необходимых параметров
 	$message1=""; $message2="";
 	$mail="";
 	$password="";
 
+	//валидация
 	if(isset($_POST['submit']))
 	{
 		$mail=$_POST['emailUser'];
@@ -23,13 +25,14 @@
 			$ppass=$pass_d['password'];
 			
 			$password=md5($password);
+			//при не верном пароле
 			if($password!=$ppass)
 			{
 				$message2="<div class='error'>Не правильный пароль!</div>";
 			}
 			else
 			{
-				header("location:profilepage.php");
+				header("location:profilepage.php"); //при успешной авторизации зайти на страницу пользователя
 			}
 		}
 	else
@@ -61,7 +64,7 @@
 <body id="body-bg">
   <div class="container">
   	<div class="login-form col-md-4 offset-md-4">
-  		<div class="jumbotron" style="margin-top: 50px; padding-top: 20px; padding-bottom: 10px;">
+  		<div class="jumbotron" style="margin-top: 50px; padding-top: 20px; padding-bottom: 20px;">
   			<h2 align="center" style="color: green;"> Форма Авторизации </h2>
   			<form method="post" enctype="multipart/form-data">
   				<!--Ввод email-->
@@ -91,6 +94,9 @@
   					<input type="submit" name="submit" value= "Зайти!" class="btn btn-success" />
   				</center>	
   				</div>
+
+  				<center><a href="signup.php">Пройти регистрацию! </a></center>
+  			
   			</form>
   			
   		</div>
