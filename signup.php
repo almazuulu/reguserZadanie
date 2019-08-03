@@ -1,15 +1,11 @@
 <?php
+	//подключаем необходимые файлы
 	include("includes/header.php"); 
 	include("includes/config.php");
+	include("includes/functions.php");
 	
-	$message1="";
-	$message2="";
-	$message3="";
-	$message4="";
-	$message5="";
-	$message6="";
-	$message7="";
-	$messageSucсess="";
+	//инициализация необходимых сообщений
+	$message1=""; $message2=""; $message3=""; $message4=""; $message5=""; $message6=""; $message7=""; $messageSucсess="";
 
 
 	if(isset($_POST['submit']))
@@ -29,6 +25,10 @@
 		{
 			$message5="<div class='error'>Пожалуйста введите правильный адрес почты!</div>";
 		}
+		else if(email_exists($mail,$conDB))
+		{
+			$message5="<div class='error'>Такой адрес почты уже существует!</div>";
+		}
 		else if(strlen($uName)<3)
 		{
 			$message1="<div class='error'>Имя пользователя должна содержать как минимум 3 буквы!</div>";
@@ -45,9 +45,12 @@
 		{
 			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
 		}
-		
-		else if(strlen($psswrd)<6)
+		else if(empty($psswrd))
 		{
+			$message6="<div class='error'>Пароль не может быть пустым!</div>";
+		}
+		else if(strlen($psswrd)<6)
+		{	
 			$message6="<div class='error'>Пароль должен состоять как минимум из 6 символов!</div>";
 		}
 		else if(strlen($psswrd!==$psswrdCopy))
@@ -56,8 +59,12 @@
 		}
 		else 
 		{	
-			mysqli_query($conDB,"SET NAMES utf8");
+			$psswrd=md5($psswrd); //шифруем пароль пользователя по методу md5
+			mysqli_query($conDB,"SET NAMES utf8"); //устанавливаем русский шрифт
+
+			//записываем в Базу данных записи
 			mysqli_query($conDB,"INSERT INTO users (mail,uName,password,lastName,firstName,middleName,sexUser,countryUser) VALUES('$mail','$uName','$psswrd','$lName','$fName','$mName','$sexUser','$countryUser')");
+			//сообщение об успешной регистрации пользователя
 			$messageSucсess="<div class='success'><center>Вы успешно зарегестрированы!</center></div>";
 		}
 	}
