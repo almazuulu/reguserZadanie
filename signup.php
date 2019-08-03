@@ -8,7 +8,7 @@
 
 	if(isset($_POST['submit']))
 	{
-		$email=$_POST['emailuser'];
+		$mail=$_POST['emailuser'];
 		$uName=$_POST['userName'];
 		$psswrd=$_POST['password'];
 		$psswrdCopy=$_POST['passwordConfirm'];
@@ -23,19 +23,19 @@
 		{
 			$message1="<div class='error'>Имя пользователя должна содержать как минимум 3 буквы!</div>";
 		}
-		else if(strlen($fName)<3)
+		if(strlen($fName)<3)
 		{
 			$message2="<div class='error'>Имя должна содержать как минимум 3 буквы!</div>";
 		}
-		else if(strlen($lName)<3)
+		if(strlen($lName)<3)
 		{
 			$message3="<div class='error'>Фамилия должна содержать как минимум 3 буквы!</div>";
 		}
-		else if(strlen($mName)<3)
+		if(strlen($mName)<3)
 		{
 			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
 		}
-		else if(!filter_var($email,FILTER_VALIDATE_EMAIL))
+		if(!filter_var($mail,FILTER_VALIDATE_EMAIL))
 		{
 			$message5="<div class='error'>Пожалуйста введите правильный адрес почты!</div>";
 		}
@@ -67,6 +67,7 @@
 				<div class="form-group">
 					<label>E-mail пользователя : </label>
 					<input type="text" name="emailuser" placeholder="E-mail" class="form-control">
+					<?php echo $message5; ?>
 				</div>
 				<!--имя пользователя-->
 				<div class="form-group">
