@@ -41,10 +41,7 @@
 		{
 			$message3="<div class='error'>Фамилия должна содержать как минимум 3 буквы!</div>";
 		}
-		else if(strlen($mName)<3)
-		{
-			$message4="<div class='error'>Отчество должна содержать как минимум 3 буквы!</div>";
-		}
+		
 		else if(empty($psswrd))
 		{
 			$message6="<div class='error'>Пароль не может быть пустым!</div>";
@@ -101,41 +98,41 @@
 				<!--e-mail пользователя-->
 				<div class="form-group">
 					<label>E-mail пользователя : </label>
-					<input type="text" name="emailuser" placeholder="E-mail" class="form-control">
+					<input type="text" name="emailuser" placeholder="E-mail" class="form-control" required>
 					<?php echo $message5; ?>
 				</div>
 				<!--имя пользователя-->
 				<div class="form-group">
 					<label>Имя пользователя : </label>
-					<input type="text" name="userName" placeholder="Имя пользователя" class="form-control">
+					<input type="text" name="userName" placeholder="Имя пользователя" class="form-control" required>
 					<?php echo $message1; ?>
 				</div>
 
 				<!--пароль-->
 				<div class="form-group">
 					<label>Пароль : </label>
-					<input type="password" name="password" placeholder="пароль" class="form-control">
+					<input type="password" name="password" placeholder="пароль" class="form-control" required>
 					<?php echo $message6; ?>
 				</div>
 
 				<!--повторный ввод пароля-->
 				<div class="form-group">
 					<label>Подтвердить пароль : </label>
-					<input type="password" name="passwordConfirm" placeholder="Подтвердить пароль" class="form-control">
+					<input type="password" name="passwordConfirm" placeholder="Подтвердить пароль" class="form-control" required>
 					<?php echo $message7; ?>
 				</div>
 
 				<!--фамилия -->
 				<div class="form-group">
 					<label>Фамилия пользователя : </label>
-					<input type="text" name="lastName" placeholder="Фамилия" class="form-control">
+					<input type="text" name="lastName" placeholder="Фамилия" class="form-control" required>
 					<?php echo $message3; ?>
 				</div>
 
 				<!--имя -->
 				<div class="form-group">
 					<label>Имя : </label>
-					<input type="text" name="firstName" placeholder="Имя" class="form-control">
+					<input type="text" name="firstName" placeholder="Имя" class="form-control" required>
 					<?php echo $message2; ?>
 				</div>
 
@@ -143,7 +140,6 @@
 				<div class="form-group">
 					<label>Отчество : </label>
 					<input type="text" name="middleName" placeholder="Отчество" class="form-control">
-					<?php echo $message4; ?>
 				</div>
 
 				<!--Пол пользователя -->
