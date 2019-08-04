@@ -38,7 +38,7 @@
 				$_SESSION['mailUser']=$mail;
 				if($checkbox=='on')
 				{
-					setcookie('name',$mail,time()+120); //cookies истекает через 2 минуты
+					setcookie('name',$mail,time()+500); //cookies истекает через 2 минуты
 				}
 				header("location:profilepage.php"); //при успешной авторизации зайти на страницу пользователя
 			}

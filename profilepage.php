@@ -17,9 +17,10 @@
 
 		$email= $_COOKIE['name'];
 	mysqli_query($conDB,"SET NAMES utf8"); //Устанавливаем кирилицу, чтобы не было проблем с отображением
-	$result= mysqli_query($conDB,"SELECT firstName,lastName FROM users WHERE mail='$email'");
+	$result= mysqli_query($conDB,"SELECT id,firstName,lastName FROM users WHERE mail='$email'");
 	$showing= mysqli_fetch_array($result);
 	//print_r($showing); //Для проверки
+	$id=$showing['id'];
 	$fName= $showing['firstName'];
 	$lName=$showing['lastName'];
     //echo "Вы только что зашли на сайт!";
@@ -39,7 +40,7 @@
 		<?php echo $email;  ?>
 		<h2 align="center">Добро пожаловать <?php echo $fName." ".$lName ?> !</h2>
 		<a href="exit.php"><button class="btn btn-outline-success" style="float:right;margin-top: 20px;">Выйти</button></a>
-		<a href="passwordchange.php"><button class="btn btn-outline-primary" style="float:left;margin-top: 20px;">Поменять пароль</button></a>
+		<a href="passwordchange.php?id=<?php echo $id ?>"><button class="btn btn-outline-primary" style="float:left;margin-top: 20px;">Поменять пароль</button></a>
 	</br></br>
 	</div>
 
@@ -52,9 +53,10 @@ else
 	$email=$_SESSION['mailUser'];
 	//echo "Вы зашли через сессию";
 	mysqli_query($conDB,"SET NAMES utf8"); //Устанавливаем кирилицу, чтобы не было проблем с отображением
-	$result= mysqli_query($conDB,"SELECT firstName,lastName FROM users WHERE mail='$email'");
+	$result= mysqli_query($conDB,"SELECT id,firstName,lastName FROM users WHERE mail='$email'");
 	$showing= mysqli_fetch_array($result);
 	//print_r($showing); //Для проверки
+	$id=$showing['id'];
 	$fName= $showing['firstName'];
 	$lName=$showing['lastName'];
     //echo "Вы только что зашли на сайт!";
@@ -75,7 +77,7 @@ else
 
 		<h2 align="center">Добро пожаловать <?php echo $fName." ".$lName ?> !</h2>
 		<a href="exit.php"><button class="btn btn-outline-success" style="float:right;margin-top: 20px;">Выйти</button></a>
-		<a href="passwordchange.php"><button class="btn btn-outline-primary" style="float:left;margin-top: 20px;">Поменять пароль</button></a>
+		<a href="passwordchange.php?id=<?php echo $id ?>"><button class="btn btn-outline-primary" style="float:left;margin-top: 20px;">Поменять пароль</button></a>
 	</div>
 
 </body>

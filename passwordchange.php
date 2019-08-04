@@ -4,11 +4,13 @@
 	include("includes/config.php");
 	session_start();
 	include("includes/functions.php");
-
+	$idUser=$_GET['id'];
+	if(isset($idUser))
+	{
 	$message="";
 	$message1="";
 	$message2="";
-	$message3="";
+	$message3="";	
 
 	$password=""; $passwordnew="";
 	
@@ -17,34 +19,40 @@
 	
 		$password = $_POST['passwordChange'];
 		$passwordnew = $_POST['newPassword'];
-		$mail=$_POST['mailUser'];
+		$passwordold= $_POST['oldPassword'];
 
-	if(!filter_var($mail,FILTER_VALIDATE_EMAIL))
-		{
-			$message3="<div class='error'>Пожалуйста введите правильный адрес почты!</div>";
-	    }
-	else if(!email_exists($mail,$conDB))
-		{
-			$message3="<div class='error'>Такой почты не существует!</div>";
-		}
+		$passwordold=md5($passwordold);
 
-	else if(strlen($password)<6)
+		mysqli_query($conDB,"SET NAMES utf8"); //Устанавливаем кирилицу, чтобы не было проблем с отображением
+		$result= mysqli_query($conDB,"SELECT password FROM users WHERE id='$idUser'");
+		$showing= mysqli_fetch_array($result);
+		
+		$dbPassword=$showing['password']; //получение старого пароля из базы данных
+	
+	//сравниваем старый пароль с тем что ввел пользователь
+	if($dbPassword!=$passwordold)
+	{
+		$message3="<div class='error'>Не правильный пароль!</div>";
+	}
+
+	else
+	{
+		if(strlen($password)<6)
 		{	
 			$message1="<div class='error'>Пароль должен состоять как минимум из 6 символов!</div>";
 		}
 
-	else if($password!=$passwordnew)
-	{
-		$message= '<div class="error">Пароли не совпадают!</div>';
-	}
+		else if($password!=$passwordnew)
+		{
+			$message= '<div class="error">Пароли не совпадают!</div>';
+		}
 
-	else
-
-	{
-		$password=md5($password);
-		mysqli_query($conDB,"UPDATE users SET password='$password' WHERE mail='$mail'");
-		$message2= "<div class='success'>Пароль успешно изменен!</div>";
-
+		else
+		{
+			$password=md5($password);
+			mysqli_query($conDB,"UPDATE users SET password='$password' WHERE id='$idUser'");
+			$message2= "<div class='success'>Пароль успешно изменен!</div>";
+		}
 	}
 	
 	}
@@ -88,10 +96,10 @@
 </br>
 		<form method="post">
   				
-				<!--Ввод нового пароля-->
+				<!--Ввод старого пароля-->
   				<div class="form-group">
-  					<label><i>Введите свой e-mail :</i></label>
-  					<input type="text" name="mailUser" placeholder="e-mail" class="form-control" required>
+  					<label><i>Введите старый пароль :</i></label>
+  					<input type="password" name="oldPassword" placeholder="старый пароль" class="form-control" required>
   					<?php echo $message3 ?>
   				</div>
 
@@ -113,6 +121,12 @@
   		</div>
 	</div>
 </div>
-
 </body>
 </html>
+<?php 
+}
+else
+{
+	header("location:loginpage.php");
+}
+?>
