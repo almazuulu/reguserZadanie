@@ -40,6 +40,11 @@
 				{
 					setcookie('name',$mail,time()+500); //cookies истекает через 2 минуты
 				}
+				//дата захода
+				$time = time() + (4*60*60);
+				$dateLogin= date("D M j G:i:s T Y",$time);
+				mysqli_query($conDB,"UPDATE users SET lastActiveDate = '$dateLogin' WHERE mail = '$mail'");
+
 				header("location:profilepage.php"); //при успешной авторизации зайти на страницу пользователя
 			}
 		}

@@ -19,7 +19,10 @@
 		$mName=$_POST['middleName'];
 		$sexUser=$_POST['sex'];
 		$countryUser=$_POST['country'];
-		//echo $email."</br>".$uName."</br>".$psswrd."</br>".$psswrdCopy."</br>".$lName."</br>".$fName."</br>".$mName."</br>".$sexUser."</br>".$countryUser;
+
+		//дата регистрации
+		$time = time() + (4*60*60);
+		$dateRegistr= date("D M j G:i:s T Y",$time);
 		
 		//процедура валидации
 		if(!filter_var($mail,FILTER_VALIDATE_EMAIL))
@@ -61,7 +64,7 @@
 			mysqli_query($conDB,"SET NAMES utf8"); //устанавливаем русский шрифт
 
 			//записываем в Базу данных записи
-			mysqli_query($conDB,"INSERT INTO users (mail,uName,password,lastName,firstName,middleName,sexUser,countryUser) VALUES('$mail','$uName','$psswrd','$lName','$fName','$mName','$sexUser','$countryUser')");
+			mysqli_query($conDB,"INSERT INTO users (mail,uName,password,lastName,firstName,middleName,sexUser,countryUser,registrDate) VALUES('$mail','$uName','$psswrd','$lName','$fName','$mName','$sexUser','$countryUser','$dateRegistr')");
 			//сообщение об успешной регистрации пользователя
 			$messageSucсess="<div class='success'><center>Вы успешно зарегестрированы!</center></div>";
 		}
