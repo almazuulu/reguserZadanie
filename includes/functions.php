@@ -14,4 +14,18 @@
 			}
 		} 
 	}
+
+	//функция которая отслеживает сессию, и если почта пользователя не авторизовалась,
+	//то возращает ее к странице авторизации
+	function logged_in()
+	{
+		if(isset($_SESSION['mailUser'])|| isset($_COOKIE['name']))
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 ?>

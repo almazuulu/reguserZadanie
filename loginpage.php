@@ -15,6 +15,7 @@
 	{
 		$mail=$_POST['emailUser'];
 		$password=$_POST['passwrd'];
+		$checkbox=isset($_POST['checkMe']);
 
 	if(!filter_var($mail,FILTER_VALIDATE_EMAIL))
 		{
@@ -35,6 +36,10 @@
 			else
 			{
 				$_SESSION['mailUser']=$mail;
+				if($checkbox=='on')
+				{
+					setcookie('name',$mail,time()+120); //cookies истекает через 2 минуты
+				}
 				header("location:profilepage.php"); //при успешной авторизации зайти на страницу пользователя
 			}
 		}
@@ -86,9 +91,9 @@
 
   				<!--Запомнить пользователя-->
   				<div class="form-group">
-  					<input type="checkbox" name="check"/>
+  					<input type="checkbox" name="checkMe"/>
   					&nbsp;
-  					Запомнить меня!
+  					Оставаться в системе!
   				</div>
 
   				<!--Ввод пароля-->
