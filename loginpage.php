@@ -3,11 +3,13 @@
 	include("includes/header.php"); 
 	include("includes/config.php");
 	include("includes/functions.php");
+
 	//инициализация необходимых параметров
 	$message1=""; $message2="";
 	$mail="";
 	$password="";
 
+	session_start();
 	//валидация
 	if(isset($_POST['submit']))
 	{
@@ -32,6 +34,7 @@
 			}
 			else
 			{
+				$_SESSION['mailUser']=$mail;
 				header("location:profilepage.php"); //при успешной авторизации зайти на страницу пользователя
 			}
 		}
