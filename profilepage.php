@@ -37,9 +37,9 @@
 <body id="body-bg">
 	<div class="container" style="background-color: #fff; margin-top: 20px; margin-bottom: 20px;width: 1200px;height: 600px;">
 		<?php echo $email;  ?>
-
 		<h2 align="center">Добро пожаловать <?php echo $fName." ".$lName ?> !</h2>
 		<a href="exit.php"><button class="btn btn-outline-success" style="float:right;margin-top: 20px;">Выйти</button></a>
+		<a href="passwordchange.php"><button class="btn btn-outline-primary" style="float:left;margin-top: 20px;">Поменять пароль</button></a>
 	</br></br>
 	</div>
 
@@ -75,7 +75,7 @@ else
 
 		<h2 align="center">Добро пожаловать <?php echo $fName." ".$lName ?> !</h2>
 		<a href="exit.php"><button class="btn btn-outline-success" style="float:right;margin-top: 20px;">Выйти</button></a>
-	</br></br>
+		<a href="passwordchange.php"><button class="btn btn-outline-primary" style="float:left;margin-top: 20px;">Поменять пароль</button></a>
 	</div>
 
 </body>
