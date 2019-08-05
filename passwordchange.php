@@ -88,7 +88,7 @@
 </head>
 <body id="body-bg">
 	<div class="container" style="padding-top: 50px; background-color: #fff; margin-top: 20px; margin-bottom: 20px;width: 1100px;height: 500px;">
-	<a href="profilepage.php"><button class="btn btn-outline-danger" style=" float:left;margin-top: 10px;">Назад</button></a>
+	<a href="profilepage.php?id=<?php echo $idUser ?>"><button class="btn btn-outline-danger" style=" float:left;margin-top: 10px;">Назад</button></a>
 	<div class="col-md-4 offset-md-4">
 	<div class="boxchangepass">
 	<h2 align="center" style="color: green;"> Поменять пароль </h2>

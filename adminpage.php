@@ -26,6 +26,10 @@
   border: 1px solid #ddd;
   margin-bottom: 12px;
 }
+
+#filter-table{
+        width: 100%;
+    }
 </style>
 
 </head>
@@ -34,7 +38,6 @@
 	<h3>Добро пожаловать на страницу Администратора! </h3>
 	
 	<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Поиск по имени пользователя.." title="Type in a name">
-	
 	<table id="filter-table" class="table table-striped table-bordered">
 		<?php 
 		mysqli_query($conDB,"SET NAMES utf8"); 
@@ -44,17 +47,15 @@
 		?>
 		
 		<tr class='table-filters'>
-        <td><b>ФИЛЬТР ПО: </b></td>
-        <td></td>
-        <td></td>
+        <td><b>ФИЛЬТРАЦИЯ: </b></td>
         <td></td>
         <td></td>
         <td>
-        	<b>ПОЛОВОМУ ПРИЗНАКУ</b>
+        	<b> ПО ПОЛОВОМУ ПРИЗНАКУ</b>
             <input type="text"/>
         </td>
         <td>
-        	<b>СТРАНЕ</b>
+        	<b>ПО СТРАНЕ</b>
             <input type="text"/>
         </td>
          <td></td>
@@ -63,16 +64,14 @@
         </tr>
 
 		<tr class="header">
-				<th> E-mail </th>
-				<th> Логин </th>
-				<th> Фамилия </th>
-				<th> Имя </th>
-				<th> Отчество </th>
-				<th> Пол </th>
-				<th> Страна </th>
-				<th> Действия </th>
-				<th> Дата регистрации </th>
-				<th> Дата последней активности </th>
+				<th><b>E-MAIL </b></th>
+				<th> <b>ИМЯ ПОЛЬЗОВАТЕЛЯ </b> </th>
+				<th> <b>ФИО </b></th>
+				<th> <b>ПОЛ </b></th>
+				<th> <b>СТРАНА </b></th>
+				<th> <b>ДЕЙСТВИЯ </b></th>
+				<th> <b>ДАТА РЕГИСТРАЦИИ </b></th>
+				<th> <b>ДАТА ПОСЛЕДНЕЙ АКТИВНОСТИ </b></th>
 		</tr>
 			<?php 
 			mysqli_query($conDB,"SET NAMES utf8"); 
@@ -92,22 +91,18 @@
 			?>
 			<tr class='table-data'>
 				<td><h5><?php echo $mailUser ?></h5></td>
-				<td><h5><?php echo $loginUser ?><h5></td>
-				<td><h5><?php echo $lName ?><h5></td>
-				<td><h5><?php echo $fName ?><h5></td>
-				<td><h5><?php echo $mName ?><h5></td>
-				
+				<td><h5><?php echo $loginUser ?></h5></td>
+				<td><h5><?php echo $lName." ".$fName." ".$mName ?></h5></td>				
 				<td><h5><?php echo $userSex ?>
-				</br></br><a href='editSexAdmin.php?editSex=$idUser'><button class='btn btn-success'>Изменить/</br>Добавить Пол</button></a>
-				</br><a href='deleteSexAdmin.php?delSex=$idUser'><button class='btn btn-danger'>Удалить Пол</button></a>
-				<h5></td>
+				</br></br><?php echo "<a href='editSexAdmin.php?editSex=$idUser'><button class='btn btn-success'>Изменить/</br>Добавить Пол</button></a>" ?>
+				</br><?php echo "<a href='deleteSexAdmin.php?delSex=$idUser'><button class='btn btn-danger'>Удалить Пол</button></a>" ?>
+				</h5></td>
 				
 				<td><h5><?php echo $userCountry ?>
-				</br></br><a href='editCountryAdmin.php?editCountry=$idUser'><button class='btn btn-success'>Изменить/</br>Добавить Страну</button></a>
-				</br><a href='deleteCountryAdmin.php?delCountry=$idUser'><button class='btn btn-danger'>Удалить Страну</button></a>
-				<h5></td>
-				<td><h5></br></br><a href='profilepageUser.php?upd=$idUser'><button class='btn btn-success'>Просмотр профиля</button></a>
-			</br><a href='statusChange.php?upd=$idUser'><button class='btn btn-danger'>Смена статуса</button>
+				</br></br><?php echo "<a href='editCountryAdmin.php?editCountry=$idUser'><button class='btn btn-success'>Изменить/</br>Добавить Страну</button></a>" ?>
+				</br><?php echo "<a href='deleteCountryAdmin.php?delCountry=$idUser'><button class='btn btn-danger'>Удалить Страну</button></a>" ?>
+				</h5></td>
+				<td><h5></br></br><?php echo "<a href='profilepageUser.php?upd=$idUser'><button class='btn btn-success'>Просмотр профиля</button></a>" ?></h5>
 			</td>
 				<td><?php echo $dateRegist ?></td>
 				<td><?php echo $dateActive ?></td>
