@@ -164,6 +164,8 @@
 
 		<!--Кнопка подтвердить -->
 		<center><input type="submit" value="Зарегестрировать!" name="submit" class="btn btn-success"></center>
+		</br>
+		<center><a href="loginpage.php">Авторизоваться! </a></center>
 	</form>
 			</div>
 		</div>		
